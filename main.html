@@ -1,0 +1,75 @@
+<html>
+<body>
+    <canvas
+        id="glcanvas" width="520" height="520"></canvas>
+</body>
+
+<div id="slider">
+    Red<input id="Red" type="range" min="0" max="1" step="0.1" value="0" /></div> 
+    <div>
+    Green<input id="Green" type="range" min="0" max="1" step="0.1" value="0"/></div> 
+    <div>
+    Blue<input id="Blue" type="range" min="0" max="1" step="0.1" value="0"/></div>
+    
+<script id="vertex-shader" type="x-shader/x-vertex">
+    //vec4 is type 4 dimensional vector
+    attribute vec4 vPosition;
+    uniform float theta;  
+    uniform vec4 x;
+    uniform vec4 y;
+    uniform vec2 scale;
+    void main() {
+            gl_Position.x = cos(theta) * vPosition.x - sin(theta) * vPosition.y+ x.x ;
+            gl_Position.y = sin(theta) * vPosition.x + cos(theta) * vPosition.y+ y.y;
+            gl_Position.z = 0.0;
+            gl_Position.w = 1.0;
+            gl_Position.x *= scale.x;
+            gl_Position.y *= scale.y; 
+        }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment"> 
+        precision mediump float; 
+        uniform vec4 Colors1;
+        void main(){
+
+           gl_FragColor = vec4( Colors1.x , Colors1.y, Colors1.z, 1.0);
+        }
+     
+ </script>
+ <br>
+<button id="RightRotation" style="widows: 260px;height:30; background-color:#97cfc3"> 
+    Rotating ClockWise
+</button>
+<button id="LeftRotation"style="widows: 260px;height:30; background-color:#97cfc3"> 
+    Rotating NotclockWise
+</button>
+<br>
+<br>
+<button id="Xtranslate"style="widows: 260px;height:30; background-color:#f7bad5"> 
+    Left Translate
+</button>
+<button id="XtranslateRight"style="widows: 260px;height:30; background-color:#f7bad5"> 
+    Right Translate
+</button>
+<br>
+
+<br>
+<button id="YtranslateUp"style="widows: 260px;height:30; background-color:#d386e3"> 
+    Up Translate
+</button>
+<button id="YtranslateDown"style="widows: 260px;height:30; background-color:#d386e3"> 
+    Down Translate
+</button>
+<button id="larger" style="widows: 260px;height:30; background-color:#bcbee3"> 
+    make it larger
+</button>
+<button id="smaller" style="widows: 260px;height:30; background-color:#bcbee3"> 
+    make it smaller
+</button>
+
+ <script src="mainJs.js"></script>
+ <script src="initShaders.js"></script>
+ <script src="webgl-utils.js"></script>
+ <script src="MV.js"></script>
+</html>
